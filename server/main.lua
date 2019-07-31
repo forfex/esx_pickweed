@@ -17,9 +17,9 @@ AddEventHandler('krp_pickweed:getItem', function()
         local itemfound = ESX.GetItemLabel(randomItems)
 
     if sourceItem.limit ~= -1 and (sourceItem.count + quantity) > sourceItem.limit then 
-        TriggerClientEvent('esx:showNotification', source, '~r~You have enough weed')
+        TriggerClientEvent('esx:showNotification', source, '~r~You have enough weed!')
     else
         xPlayer.addInventoryItem('weed', quantity)
-        TriggerClientEvent('esx:showNotification', source, 'You found ' .. quantity .. ' gram of ' .. itemfound)
+        TriggerClientEvent('esx:showNotification', source, 'You found ' .. quantity .. ' gram of weed.')
     end
 end)
