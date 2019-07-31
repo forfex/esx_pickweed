@@ -10,22 +10,16 @@ end)
 RegisterServerEvent('krp_pickweed:getItem')
 AddEventHandler('krp_pickweed:getItem', function()
 
-    local luck = math.random(1, 3)
-
-    if luck == 1 then
-
-        local items = { 
-            'weed'
-        }
 
         local xPlayer = ESX.GetPlayerFromId(source)
-        local randomItems = items[math.random(#items)]
-        local quantity = math.random(#items)
+        local sourceItem = xPlayer.getInventoryItem('weed')
+        local quantity = 1
         local itemfound = ESX.GetItemLabel(randomItems)
 
-        xPlayer.addInventoryItem(randomItems, quantity)
-        TriggerClientEvent('esx:showNotification', source, 'You found ' .. quantity .. ' gram of ' .. itemfound)
+    if sourceItem.limit ~= -1 and (sourceItem.count + quantity) > sourceItem.limit then 
+        TriggerClientEvent('esx:showNotification', source, '~r~You have enough weed')
     else
-        TriggerClientEvent('esx:showNotification', source, 'Nothing found, maybe someone already harvested?')
+        xPlayer.addInventoryItem('weed', quantity)
+        TriggerClientEvent('esx:showNotification', source, 'You found ' .. quantity .. ' gram of ' .. itemfound)
     end
 end)
